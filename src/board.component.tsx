@@ -1,42 +1,53 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
-import "./index.css";
 import { Square } from "./square.component";
+import "./board.component.css";
 
-type Props = {
+/** ---------------------------------------------------------------------------
+ * Component Props
+ * ----------------------------------------------------------------------------
+ */
+interface BoardProps {
+    squares: string[],
+    onClick: (i: number) => void
 }
 
-type State = {
-    squares: string[]
+/** ---------------------------------------------------------------------------
+ * Component States
+ * ----------------------------------------------------------------------------
+ */
+interface BoardState {
 }
 
-export class Board extends React.Component<Props, State> {
-    constructor(props: Props) {
+/** ---------------------------------------------------------------------------
+ * Component
+ * ----------------------------------------------------------------------------
+ */
+export class Board extends React.Component<BoardProps, BoardState> {
+    constructor(props: BoardProps) {
         super(props);
-        this.state = {
-            squares: Array(9).fill(null)
-        }
     }
 
-    handleClick(i?: any) {
-        const squares = this.state.squares.slice();
-        squares[i] = 'X';
-        this.setState({
-            squares: squares
-        });
+    /**
+     * 
+     * @param i 
+     * @returns 
+     */
+    renderSquare(i: number) {
+        return (
+            <Square
+                value={this.props.squares[i]}
+                onClick={() => this.props.onClick(i)}
+            />
+        );
     }
 
-    renderSquare(i?: any) {
-        return <Square value={this.state.squares[i]}
-            onClick={() => this.handleClick(i)} />;
-    }
-
+    /**
+     * 
+     * @returns 
+     */
     render() {
-        const status = 'Next player: X';
-
         return (
             <div>
-                <div className="status">{status}</div>
                 <div className="board-row">
                     {this.renderSquare(0)}
                     {this.renderSquare(1)}
@@ -52,7 +63,7 @@ export class Board extends React.Component<Props, State> {
                     {this.renderSquare(7)}
                     {this.renderSquare(8)}
                 </div>
-            </div>
+            </div >
         );
     }
 }

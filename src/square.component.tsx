@@ -1,23 +1,37 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
-import "./index.css";
+import "./square.component.css";
 
-type Props = {
-    value: any,
-    onClick: any
+/** ---------------------------------------------------------------------------
+ * Component Props
+ * ----------------------------------------------------------------------------
+ */
+interface SquareProps {
+    value: string,
+    onClick: () => void
 }
 
-type State = {
+/** ---------------------------------------------------------------------------
+ * Component State
+ * ----------------------------------------------------------------------------
+ */
+interface SquareState {
 }
 
-export class Square extends React.Component<Props, State> {
-    constructor(props: Props) {
+/** ---------------------------------------------------------------------------
+ * Component
+ * ----------------------------------------------------------------------------
+ */
+export class Square extends React.Component<SquareProps, SquareState> {
+    constructor(props: SquareProps) {
         super(props);
     }
 
     render() {
         return (
-            <button className="square" onClick={() => this.props.onClick()}>
+            <button
+                className="square"
+                onClick={this.props.onClick}
+            >
                 {this.props.value}
             </button>
         );

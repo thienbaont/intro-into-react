@@ -1,0 +1,12 @@
+.game {
+    display: flex;
+    flex-direction: row;
+}
+
+.game-info {
+    margin-left: 20px;
+}
+
+.game-info>ol>li+li {
+    margin-top: 0.5rem;
+}
